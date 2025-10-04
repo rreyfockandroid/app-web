@@ -15,7 +15,7 @@ var views = map[string]string{
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World!")
+	fmt.Fprintf(w, "Hello, World! app")
 }
 
 func headers(w http.ResponseWriter, r *http.Request) {
