@@ -6,6 +6,7 @@ spec:
   selector:
     app: http-server-app
   ports:
-    - port: 80
-      targetPort: 7092
-  type: ClusterIP
+    - port: 80          # port widoczny w klastrze
+      targetPort: 7092  # port, na którym działa aplikacja
+      nodePort: 30080   # port hosta Minikube (dostępny z zewnątrz)
+  type: NodePort
