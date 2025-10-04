@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"math/rand"
+	"sync/atomic"
 )
 
 const (
@@ -14,8 +16,13 @@ var views = map[string]string{
 	"headers": "/headers",
 }
 
+var (
+	number = randomFunction()
+	counter = int32(0)
+)
+
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World! app")
+	fmt.Fprintf(w, "Hello, World! app %d, %d\n", number, atomic.AddInt32(&counter, 1))
 }
 
 func headers(w http.ResponseWriter, r *http.Request) {
@@ -37,4 +44,10 @@ func main() {
 	http.HandleFunc(views["/"], hello)
 	http.HandleFunc(views["headers"], headers)
 	http.ListenAndServe(port, nil)
+}
+
+func randomFunction() int {
+	min := 1
+	max := 100
+	return rand.Intn(max-min) + min
 }

@@ -5,9 +5,8 @@ run: build
 	./http_server
 
 docker-build:
-	eval $(minikube docker-env)
-	docker build -t http-server-app:latest .
+	eval $(minikube docker-env) && docker build -t http-server-app:latest .
 
 argo-redeploy:
-	argocd app sync http-server-app --force
+	argocd app sync http-server-app --force && kubectl rollout restart deployment http-server-app
 
