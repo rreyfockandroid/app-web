@@ -16,7 +16,9 @@ spec:
     spec:
       containers:
         - name: http-server-app
-          image: rreyfockandroid/http-server-app:latest  # 🔁 podaj tu swój obraz Dockerowy
+          image: http-server-app:latest
+          imagePullPolicy: Never
+          # image: rreyfockandroid/http-server-app:latest  # 🔁 podaj tu swój obraz Dockerowy
           ports:
             - containerPort: 7092
           resources:
