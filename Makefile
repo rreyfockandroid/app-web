@@ -10,3 +10,13 @@ docker-build:
 argo-redeploy:
 	argocd app sync http-server-app --force && kubectl rollout restart deployment http-server-app
 
+argo-create:
+	argocd app create http-server-app \
+    --repo https://github.com/rreyfockandroid/app-web \
+    --path k8s \
+    --dest-namespace default \
+    --dest-server "https://kubernetes.default.svc" \
+    --sync-policy automated --self-heal --auto-prune
+
+web:
+	minikube service http-server-app

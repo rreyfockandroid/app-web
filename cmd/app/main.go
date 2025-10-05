@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"math/rand"
 	"sync/atomic"
+	"log"
 )
 
 const (
@@ -22,13 +23,18 @@ var (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World! app %d, %d\n", number, atomic.AddInt32(&counter, 1))
+	s := fmt.Sprintf("Hello, World! web app %d, %d", number, atomic.AddInt32(&counter, 1))
+	log.Println(s)
+	fmt.Fprintf(w, "%s", s)
 }
 
 func headers(w http.ResponseWriter, r *http.Request) {
 	for name, values := range r.Header {
 		for _, value := range values {
-			fmt.Fprintf(w, "%s: %s\n", name, value)
+			
+			s := fmt.Sprintf("%s: %s", name, value)
+			log.Println(s)
+			fmt.Fprintf(w, "%s\n", s)
 		}
 	}
 }
@@ -39,7 +45,7 @@ func main() {
 		v = append(v, path)
 	}
 
-	fmt.Printf("Starting server on port %s, views: %v\n", port, v)
+	log.Printf("Starting server on port %s, views: %v\n", port, v)
 
 	http.HandleFunc(views["/"], hello)
 	http.HandleFunc(views["headers"], headers)
