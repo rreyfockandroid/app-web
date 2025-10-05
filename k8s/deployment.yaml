@@ -5,7 +5,7 @@ metadata:
   labels:
     app: http-server-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: http-server-app
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: http-server-app
-          image: http-server-app:v1.1759646147
+          image: http-server-app:v1.1759646487
           imagePullPolicy: Never
           # image: rreyfockandroid/http-server-app:latest  # 🔁 podaj tu swój obraz Dockerowy
           ports:
