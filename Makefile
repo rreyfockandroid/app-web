@@ -7,8 +7,7 @@ run: build
 	./http_server
 
 docker-build:
-	`eval $(minikube docker-env)`
-	docker build -t http-server-app:$(TAG) .
+	@bash -c 'eval $$(minikube docker-env) && docker build -t http-server-app:$(TAG) .'
 	sed -i "s|image: http-server-app:.*|image: http-server-app:$(TAG)|" ./k8s/deployment.yaml
 
 commit:
