@@ -23,7 +23,7 @@ var (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	s := fmt.Sprintf("Hello, World! XXX web app %d, %d", number, atomic.AddInt32(&counter, 1))
+	s := fmt.Sprintf("Hello, World! YYYY web app %d, %d", number, atomic.AddInt32(&counter, 1))
 	log.Println(s)
 	fmt.Fprintf(w, "%s", s)
 }
