@@ -32,3 +32,6 @@ argo-create:
 
 web:
 	minikube service http-server-app
+    
+argo-delete:
+	argocd app delete http-server-app --cascade
